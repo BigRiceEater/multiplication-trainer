@@ -5,7 +5,7 @@ class Clock extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeElapsed: moment.duration(0, "seconds"),
+      timeElapsed: moment().diff(),
     };
   }
 
@@ -13,6 +13,7 @@ class Clock extends React.Component {
     // we don't add timerID to this.state because it doesn't actually take part in the data flow or change,
     // we are free to add variables directly to the class component instead since it don't change
     this.timerID = setInterval(() => this.tick(), 1000);
+    this.startTime = moment();
   }
 
   componentWillUnmount() {
@@ -20,14 +21,18 @@ class Clock extends React.Component {
   }
 
   tick() {
-    const { timeElapsed } = this.state;
-    timeElapsed.add(1, "seconds");
-    this.setState({ timeElapsed });
+    this.setState({ timeElapsed: moment().diff(this.startTime) });
+  }
+
+  formatTimeDisplay(time) {
+    return moment(time).format("mm:ss");
   }
 
   render() {
     const { timeElapsed } = this.state;
-    return <div>Current running time : {timeElapsed.asSeconds()}</div>;
+    return (
+      <div>Current running time : {this.formatTimeDisplay(timeElapsed)}</div>
+    );
   }
 }
 
