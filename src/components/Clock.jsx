@@ -5,7 +5,7 @@ class Clock extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeElapsed: 0,
+      timeElapsed: moment.duration(0, "seconds"),
     };
   }
 
@@ -20,12 +20,14 @@ class Clock extends React.Component {
   }
 
   tick() {
-    this.setState({ timeElapsed: ++this.state.timeElapsed });
+    const { timeElapsed } = this.state;
+    timeElapsed.add(1, "seconds");
+    this.setState({ timeElapsed });
   }
 
   render() {
     const { timeElapsed } = this.state;
-    return <div>Current running time : {timeElapsed}</div>;
+    return <div>Current running time : {timeElapsed.asSeconds()}</div>;
   }
 }
 
