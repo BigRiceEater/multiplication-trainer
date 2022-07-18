@@ -36,7 +36,7 @@ class Trainer extends React.Component {
     return (
       <React.Fragment>
         <Question operands={operands} />
-        <MultipleChoice onclick={this.handleChoice} />
+        <MultipleChoice onClick={this.handleChoice} />
       </React.Fragment>
     );
   }

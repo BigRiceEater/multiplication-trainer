@@ -6,13 +6,13 @@ class MultipleChoice extends React.Component {
   }
 
   render() {
-    const { onclick } = this.props;
+    const { onClick } = this.props;
 
     return (
       <div>
         <div className="row">
           <div className="col-md-6">
-            <button className="btn-primary" onClick={onclick}>
+            <button className="btn-primary" onClick={onClick}>
               Option 1
             </button>
           </div>
