@@ -1,4 +1,5 @@
 import React from "react";
+import Choice from "./Choice";
 
 class MultipleChoice extends React.Component {
   constructor(props) {
@@ -12,9 +13,7 @@ class MultipleChoice extends React.Component {
       <div>
         <div className="row">
           <div className="col-md-6">
-            <button className="btn-primary" onClick={onClick}>
-              Option 1
-            </button>
+            <Choice value="Option 1" onClick={onClick} />
           </div>
           <div className="col-md-6">
             <button className="btn-primary">Option 2</button>
