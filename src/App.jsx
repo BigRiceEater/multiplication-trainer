@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Clock from "./components/Clock";
-import Question from "./components/Question";
+import Trainer from "./components/Trainer";
 import MultipleChoice from "./components/MultipleChoice";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Question />
+        <Trainer />
         <MultipleChoice />
         <Clock />
         <p>
