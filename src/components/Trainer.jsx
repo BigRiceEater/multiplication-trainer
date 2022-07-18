@@ -42,7 +42,6 @@ class Trainer extends React.Component {
   }
 
   handleChoice = (value) => {
-    console.log(value);
     this.refresh();
   };
 
