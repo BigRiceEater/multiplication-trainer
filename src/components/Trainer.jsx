@@ -1,5 +1,6 @@
 import React from "react";
 import Question from "./Question";
+import MultipleChoice from "./MultipleChoice";
 
 class Trainer extends React.Component {
   constructor(props) {
@@ -26,11 +27,16 @@ class Trainer extends React.Component {
     });
   }
 
+  handleChoice = () => {
+    this.refresh();
+  };
+
   render() {
     const { operands } = this.state;
     return (
       <React.Fragment>
         <Question operands={operands} />
+        <MultipleChoice onclick={this.handleChoice} />
       </React.Fragment>
     );
   }

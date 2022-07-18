@@ -2,7 +2,6 @@ import logo from "./logo.svg";
 import "./App.css";
 import Clock from "./components/Clock";
 import Trainer from "./components/Trainer";
-import MultipleChoice from "./components/MultipleChoice";
 
 function App() {
   return (
@@ -10,7 +9,6 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Trainer />
-        <MultipleChoice />
         <Clock />
         <p>
           Edit <code>src/App.js</code> and save to reload.
