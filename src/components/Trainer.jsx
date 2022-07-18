@@ -2,6 +2,8 @@ import React from "react";
 import Question from "./Question";
 import MultipleChoice from "./MultipleChoice";
 
+import getNumber from "../util/getNumber.js";
+
 class Trainer extends React.Component {
   constructor(props) {
     super(props);
@@ -14,14 +16,10 @@ class Trainer extends React.Component {
     this.refresh();
   }
 
-  getNumber(min, max) {
-    return Math.ceil(Math.random() * max + min);
-  }
-
   refresh() {
     const { min = 1, max = 9 } = this.props;
-    const a = this.getNumber(min, max);
-    const b = this.getNumber(min, max);
+    const a = getNumber(min, max);
+    const b = getNumber(min, max);
     this.setState({
       operands: [a, b],
     });
