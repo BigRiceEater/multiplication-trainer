@@ -1,37 +1,15 @@
 import React from "react";
 import Choice from "./Choice";
-import getNumber from "../util/getNumber.js";
 
 class MultipleChoice extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      choices: [],
-    };
-    this.numChoices = 4;
   }
 
-  createValues() {
-    return Array(this.numChoices)
-      .fill(0)
-      .map(() => {
-        const a = getNumber(1, 9);
-        const b = getNumber(1, 9);
-        return a * b;
-      });
-  }
-
-  componentDidMount() {
-    const { answer = 0 } = this.props;
-    const replaceChoiceIndex = getNumber(0, 3);
-    const choices = this.createValues();
-    choices[replaceChoiceIndex] = answer;
-    this.setState({ choices });
-  }
+  componentDidMount() {}
 
   render() {
-    const { onClick } = this.props;
-    const { choices } = this.state;
+    const { choices, onClick } = this.props;
 
     return (
       <div>
