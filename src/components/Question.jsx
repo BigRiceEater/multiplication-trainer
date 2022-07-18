@@ -28,9 +28,9 @@ class Question extends React.Component {
   render() {
     const { operands } = this.state;
     return (
-      <span>
+      <h1>
         What is {operands[0]} x {operands[1]} ?
-      </span>
+      </h1>
     );
   }
 }
