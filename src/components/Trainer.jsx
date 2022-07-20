@@ -3,6 +3,7 @@ import Question from "./Question";
 import MultipleChoice from "./MultipleChoice";
 
 import getNumber from "../util/getNumber.js";
+import NextButton from "./NextButton";
 
 class Trainer extends React.Component {
   constructor(props) {
@@ -47,6 +48,10 @@ class Trainer extends React.Component {
     //this.refresh();
   };
 
+  handleNextButtonClick = () => {
+    this.refresh();
+  };
+
   render() {
     const { operands, choices, answerClicked } = this.state;
     return (
@@ -57,6 +62,16 @@ class Trainer extends React.Component {
           onClick={this.handleChoice}
           answerClicked={answerClicked}
         />
+        <div className="container">
+          <div className="row">
+            <div className="col">
+              <NextButton
+                show={answerClicked}
+                onClick={this.handleNextButtonClick}
+              />
+            </div>
+          </div>
+        </div>
       </React.Fragment>
     );
   }
