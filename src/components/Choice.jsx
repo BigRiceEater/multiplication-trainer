@@ -8,9 +8,13 @@ class Choice extends React.Component {
   render() {
     const appearance = "btn-secondary";
     const style = `btn ${appearance} w-100`;
-    const { value, onClick } = this.props;
+    const { value, onClick, disabled } = this.props;
     return (
-      <button className={style} onClick={() => onClick(value)}>
+      <button
+        className={style}
+        onClick={() => onClick(value)}
+        disabled={disabled}
+      >
         {value}
       </button>
     );

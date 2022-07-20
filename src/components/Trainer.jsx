@@ -10,6 +10,7 @@ class Trainer extends React.Component {
     this.state = {
       operands: [0, 0],
       choices: [0, 0, 0, 0],
+      answerClicked: false,
     };
     this.numChoices = 4;
   }
@@ -38,19 +39,24 @@ class Trainer extends React.Component {
     const replaceChoiceIndex = getNumber(0, 3);
     choices[replaceChoiceIndex] = answer;
 
-    this.setState({ operands: [a, b], choices });
+    this.setState({ operands: [a, b], choices, answerClicked: false });
   }
 
   handleChoice = (value) => {
-    this.refresh();
+    this.setState({ answerClicked: true });
+    //this.refresh();
   };
 
   render() {
-    const { operands, choices } = this.state;
+    const { operands, choices, answerClicked } = this.state;
     return (
       <React.Fragment>
         <Question operands={operands} />
-        <MultipleChoice choices={choices} onClick={this.handleChoice} />
+        <MultipleChoice
+          choices={choices}
+          onClick={this.handleChoice}
+          answerClicked={answerClicked}
+        />
       </React.Fragment>
     );
   }
