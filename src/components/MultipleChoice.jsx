@@ -12,7 +12,7 @@ class MultipleChoice extends React.Component {
     const { choices, onClick } = this.props;
 
     return (
-      <div>
+      <div className="container">
         <div className="row">
           <div className="col-md-6">
             <Choice value={choices[0]} onClick={onClick} />
