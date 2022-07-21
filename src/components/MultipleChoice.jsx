@@ -4,8 +4,7 @@ import { Choice, BUTTON_STATE } from "./Choice";
 class MultipleChoice extends React.Component {
   constructor(props) {
     super(props);
-    this.numRows = 2;
-    this.numCols = 2;
+    this.numButtons = 4;
   }
 
   ButtonItems = () => {
@@ -20,18 +19,18 @@ class MultipleChoice extends React.Component {
 
     const elements = [];
 
-    for (let i = 0; i < 4; i++) {
+    for (let index = 0; index < this.numButtons; index++) {
       elements.push(
         <Choice
-          value={choices[i]}
-          index={i}
+          value={choices[index]}
+          index={index}
           onClick={onClick}
           disabled={answerClicked}
           highlight={
             showCorrection
-              ? correctIndex == i
+              ? correctIndex == index
                 ? BUTTON_STATE.correct
-                : userClickedButtonIndex == i
+                : userClickedButtonIndex == index
                 ? BUTTON_STATE.wrong
                 : BUTTON_STATE.default
               : BUTTON_STATE.default
