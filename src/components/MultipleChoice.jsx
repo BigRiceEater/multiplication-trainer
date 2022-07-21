@@ -4,9 +4,11 @@ import { Choice, BUTTON_STATE } from "./Choice";
 class MultipleChoice extends React.Component {
   constructor(props) {
     super(props);
+    this.numRows = 2;
+    this.numCols = 2;
   }
 
-  render() {
+  ButtonItems = () => {
     const {
       choices,
       onClick,
@@ -16,79 +18,42 @@ class MultipleChoice extends React.Component {
       userClickedButtonIndex,
     } = this.props;
 
+    const elements = [];
+
+    for (let i = 0; i < 4; i++) {
+      elements.push(
+        <Choice
+          value={choices[i]}
+          index={i}
+          onClick={onClick}
+          disabled={answerClicked}
+          highlight={
+            showCorrection
+              ? correctIndex == i
+                ? BUTTON_STATE.correct
+                : userClickedButtonIndex == i
+                ? BUTTON_STATE.wrong
+                : BUTTON_STATE.default
+              : BUTTON_STATE.default
+          }
+        />
+      );
+    }
+    return elements;
+  };
+
+  render() {
+    const buttons = this.ButtonItems();
+
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-6">
-            <Choice
-              value={choices[0]}
-              index={0}
-              onClick={onClick}
-              disabled={answerClicked}
-              highlight={
-                showCorrection
-                  ? correctIndex == 0
-                    ? BUTTON_STATE.correct
-                    : userClickedButtonIndex == 0
-                    ? BUTTON_STATE.wrong
-                    : BUTTON_STATE.default
-                  : BUTTON_STATE.default
-              }
-            />
-          </div>
-          <div className="col-md-6">
-            <Choice
-              value={choices[1]}
-              index={1}
-              onClick={onClick}
-              disabled={answerClicked}
-              highlight={
-                showCorrection
-                  ? correctIndex == 1
-                    ? BUTTON_STATE.correct
-                    : userClickedButtonIndex == 1
-                    ? BUTTON_STATE.wrong
-                    : BUTTON_STATE.default
-                  : BUTTON_STATE.default
-              }
-            />
-          </div>
+          <div className="col-md-6">{buttons[0]}</div>
+          <div className="col-md-6">{buttons[1]}</div>
         </div>
         <div className="row">
-          <div className="col-md-6">
-            <Choice
-              value={choices[2]}
-              index={2}
-              onClick={onClick}
-              disabled={answerClicked}
-              highlight={
-                showCorrection
-                  ? correctIndex == 2
-                    ? BUTTON_STATE.correct
-                    : userClickedButtonIndex == 2
-                    ? BUTTON_STATE.wrong
-                    : BUTTON_STATE.default
-                  : BUTTON_STATE.default
-              }
-            />
-          </div>
-          <div className="col-md-6">
-            <Choice
-              value={choices[3]}
-              index={3}
-              onClick={onClick}
-              disabled={answerClicked}
-              highlight={
-                showCorrection
-                  ? correctIndex == 3
-                    ? BUTTON_STATE.correct
-                    : userClickedButtonIndex == 3
-                    ? BUTTON_STATE.wrong
-                    : BUTTON_STATE.default
-                  : BUTTON_STATE.default
-              }
-            />
-          </div>
+          <div className="col-md-6">{buttons[2]}</div>
+          <div className="col-md-6">{buttons[3]}</div>
         </div>
       </div>
     );
