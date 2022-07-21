@@ -11,13 +11,14 @@ class Choice extends React.Component {
       onClick,
       disabled,
       highlight = BUTTON_STATE.default,
+      index,
     } = this.props;
 
     const style = `btn ${highlight} w-100`;
     return (
       <button
         className={style}
-        onClick={() => onClick(value)}
+        onClick={() => onClick(index)}
         disabled={disabled}
       >
         {value}

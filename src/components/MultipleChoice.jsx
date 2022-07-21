@@ -7,8 +7,14 @@ class MultipleChoice extends React.Component {
   }
 
   render() {
-    const { choices, onClick, answerClicked, correctIndex, showCorrection } =
-      this.props;
+    const {
+      choices,
+      onClick,
+      answerClicked,
+      correctIndex,
+      showCorrection,
+      userClickedButtonIndex,
+    } = this.props;
 
     return (
       <div className="container">
@@ -16,13 +22,16 @@ class MultipleChoice extends React.Component {
           <div className="col-md-6">
             <Choice
               value={choices[0]}
+              index={0}
               onClick={onClick}
               disabled={answerClicked}
               highlight={
                 showCorrection
                   ? correctIndex == 0
                     ? BUTTON_STATE.correct
-                    : BUTTON_STATE.wrong
+                    : userClickedButtonIndex == 0
+                    ? BUTTON_STATE.wrong
+                    : BUTTON_STATE.default
                   : BUTTON_STATE.default
               }
             />
@@ -30,13 +39,16 @@ class MultipleChoice extends React.Component {
           <div className="col-md-6">
             <Choice
               value={choices[1]}
+              index={1}
               onClick={onClick}
               disabled={answerClicked}
               highlight={
                 showCorrection
                   ? correctIndex == 1
                     ? BUTTON_STATE.correct
-                    : BUTTON_STATE.wrong
+                    : userClickedButtonIndex == 1
+                    ? BUTTON_STATE.wrong
+                    : BUTTON_STATE.default
                   : BUTTON_STATE.default
               }
             />
@@ -46,13 +58,16 @@ class MultipleChoice extends React.Component {
           <div className="col-md-6">
             <Choice
               value={choices[2]}
+              index={2}
               onClick={onClick}
               disabled={answerClicked}
               highlight={
                 showCorrection
                   ? correctIndex == 2
                     ? BUTTON_STATE.correct
-                    : BUTTON_STATE.wrong
+                    : userClickedButtonIndex == 2
+                    ? BUTTON_STATE.wrong
+                    : BUTTON_STATE.default
                   : BUTTON_STATE.default
               }
             />
@@ -60,13 +75,16 @@ class MultipleChoice extends React.Component {
           <div className="col-md-6">
             <Choice
               value={choices[3]}
+              index={3}
               onClick={onClick}
               disabled={answerClicked}
               highlight={
                 showCorrection
                   ? correctIndex == 3
                     ? BUTTON_STATE.correct
-                    : BUTTON_STATE.wrong
+                    : userClickedButtonIndex == 3
+                    ? BUTTON_STATE.wrong
+                    : BUTTON_STATE.default
                   : BUTTON_STATE.default
               }
             />
