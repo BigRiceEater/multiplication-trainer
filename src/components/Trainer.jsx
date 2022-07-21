@@ -12,6 +12,7 @@ class Trainer extends React.Component {
       operands: [0, 0],
       choices: [0, 0, 0, 0],
       answerClicked: false,
+      correctIndex: 0,
     };
     this.numChoices = 4;
   }
@@ -40,7 +41,12 @@ class Trainer extends React.Component {
     const replaceChoiceIndex = getNumber(0, 3);
     choices[replaceChoiceIndex] = answer;
 
-    this.setState({ operands: [a, b], choices, answerClicked: false });
+    this.setState({
+      operands: [a, b],
+      choices,
+      answerClicked: false,
+      correctIndex: replaceChoiceIndex,
+    });
   }
 
   handleChoice = (value) => {
@@ -53,14 +59,16 @@ class Trainer extends React.Component {
   };
 
   render() {
-    const { operands, choices, answerClicked } = this.state;
+    const { operands, choices, answerClicked, correctIndex } = this.state;
     return (
       <React.Fragment>
         <Question operands={operands} />
         <MultipleChoice
           choices={choices}
+          correctIndex={correctIndex}
           onClick={this.handleChoice}
           answerClicked={answerClicked}
+          showCorrection={answerClicked}
         />
         <div className="container">
           <div className="row">

@@ -1,5 +1,5 @@
 import React from "react";
-import Choice from "./Choice";
+import { Choice, BUTTON_STATE } from "./Choice";
 
 class MultipleChoice extends React.Component {
   constructor(props) {
@@ -7,7 +7,8 @@ class MultipleChoice extends React.Component {
   }
 
   render() {
-    const { choices, onClick, answerClicked } = this.props;
+    const { choices, onClick, answerClicked, correctIndex, showCorrection } =
+      this.props;
 
     return (
       <div className="container">
@@ -17,6 +18,13 @@ class MultipleChoice extends React.Component {
               value={choices[0]}
               onClick={onClick}
               disabled={answerClicked}
+              highlight={
+                showCorrection
+                  ? correctIndex == 0
+                    ? BUTTON_STATE.correct
+                    : BUTTON_STATE.wrong
+                  : BUTTON_STATE.default
+              }
             />
           </div>
           <div className="col-md-6">
@@ -24,6 +32,13 @@ class MultipleChoice extends React.Component {
               value={choices[1]}
               onClick={onClick}
               disabled={answerClicked}
+              highlight={
+                showCorrection
+                  ? correctIndex == 1
+                    ? BUTTON_STATE.correct
+                    : BUTTON_STATE.wrong
+                  : BUTTON_STATE.default
+              }
             />
           </div>
         </div>
@@ -33,6 +48,13 @@ class MultipleChoice extends React.Component {
               value={choices[2]}
               onClick={onClick}
               disabled={answerClicked}
+              highlight={
+                showCorrection
+                  ? correctIndex == 2
+                    ? BUTTON_STATE.correct
+                    : BUTTON_STATE.wrong
+                  : BUTTON_STATE.default
+              }
             />
           </div>
           <div className="col-md-6">
@@ -40,6 +62,13 @@ class MultipleChoice extends React.Component {
               value={choices[3]}
               onClick={onClick}
               disabled={answerClicked}
+              highlight={
+                showCorrection
+                  ? correctIndex == 3
+                    ? BUTTON_STATE.correct
+                    : BUTTON_STATE.wrong
+                  : BUTTON_STATE.default
+              }
             />
           </div>
         </div>
