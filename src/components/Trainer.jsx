@@ -1,6 +1,7 @@
 import React from "react";
 import Question from "./Question";
 import MultipleChoice from "./MultipleChoice";
+import Clock from "./Clock";
 
 import getNumber from "../util/getNumber.js";
 import NextButton from "./NextButton";
@@ -88,6 +89,7 @@ class Trainer extends React.Component {
             </div>
           </div>
         </div>
+        <Clock />
       </React.Fragment>
     );
   }

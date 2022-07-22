@@ -1,6 +1,5 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Clock from "./components/Clock";
 import Trainer from "./components/Trainer";
 import Navigation from "./components/Navigation";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -24,15 +23,7 @@ function App() {
           <Navigation />
           <Routes>
             <Route path="/settings" element={<Settings />} />
-            <Route
-              path="/"
-              element={
-                <React.Fragment>
-                  <Trainer />
-                  <Clock />
-                </React.Fragment>
-              }
-            />
+            <Route path="/" element={<Trainer />} />
           </Routes>
         </Router>
         <p>
