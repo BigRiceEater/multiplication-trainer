@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Clock from "./components/Clock";
 import Trainer from "./components/Trainer";
+import Navigation from "./components/Navigation";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import React from "react";
 
@@ -20,8 +21,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
 
         <Router>
-          <Link to="/settings">Settings</Link>
-          <Link to="/">Trainer</Link>
+          <Navigation />
           <Routes>
             <Route path="/settings" element={<Settings />} />
             <Route
