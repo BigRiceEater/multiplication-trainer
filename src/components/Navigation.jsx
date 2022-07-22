@@ -10,7 +10,7 @@ class Navigation extends React.Component {
   }
 
   linkButton = (to, label, selected) => {
-    const style = `btn btn-${selected ? "success" : "secondary"} w-100`;
+    const style = `btn btn-${selected ? "primary" : "secondary"} w-100`;
     return (
       <Link to={to}>
         <button
