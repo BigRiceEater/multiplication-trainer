@@ -1,15 +1,18 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 
 import Navigation from "./components/Navigation";
 import Trainer from "./components/Trainer";
 import Settings from "./components/Settings";
 
 function App() {
+  const [settingsValue, setSettingsValue] = useState({});
+
   function handleSettingsConfirm(valueObj) {
     console.log(valueObj);
+    setSettingsValue(valueObj);
   }
 
   return (
@@ -24,7 +27,10 @@ function App() {
               path="/settings"
               element={<Settings onConfirm={handleSettingsConfirm} />}
             />
-            <Route path="/" element={<Trainer />} />
+            <Route
+              path="/"
+              element={<Trainer min={settingsValue["minimum-operand-input"]} />}
+            />
           </Routes>
         </Router>
         <p>
