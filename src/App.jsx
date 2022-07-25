@@ -8,6 +8,10 @@ import Trainer from "./components/Trainer";
 import Settings from "./components/Settings";
 
 function App() {
+  function handleSettingsConfirm(valueObj) {
+    console.log(valueObj);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -16,7 +20,10 @@ function App() {
         <Router>
           <Navigation />
           <Routes>
-            <Route path="/settings" element={<Settings />} />
+            <Route
+              path="/settings"
+              element={<Settings onConfirm={handleSettingsConfirm} />}
+            />
             <Route path="/" element={<Trainer />} />
           </Routes>
         </Router>

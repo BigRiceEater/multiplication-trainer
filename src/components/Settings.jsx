@@ -16,6 +16,7 @@ class Settings extends React.Component {
   };
 
   render() {
+    const { onConfirm } = this.props;
     return (
       <div className="container my-5">
         <form>
@@ -24,6 +25,13 @@ class Settings extends React.Component {
             onChange={this.handleValueChanged}
           />
         </form>
+        <button
+          className="btn btn-success w-50"
+          type="button"
+          onClick={() => onConfirm(this.state)}
+        >
+          Set
+        </button>
       </div>
     );
   }
