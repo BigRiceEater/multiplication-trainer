@@ -1,17 +1,11 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Trainer from "./components/Trainer";
-import Navigation from "./components/Navigation";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import React from "react";
 
-function Settings() {
-  return (
-    <div>
-      <h1>This is the settings page</h1>
-    </div>
-  );
-}
+import Navigation from "./components/Navigation";
+import Trainer from "./components/Trainer";
+import Settings from "./components/Settings";
 
 function App() {
   return (
