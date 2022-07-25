@@ -1,5 +1,7 @@
-function NumberSelection({ label, defaultValue = 1 }) {
-  const elementID = `${label.toLowerCase().replaceAll(" ", "-")}-input`;
+import elementIDFromLabel from "../util/elementIDFromLabel";
+
+function NumberSelection({ label, defaultValue = 1, onChange }) {
+  const elementID = elementIDFromLabel(label);
   return (
     <div className="mb-3 row">
       <label htmlFor={elementID} className="col-sm-4">
@@ -13,6 +15,7 @@ function NumberSelection({ label, defaultValue = 1 }) {
           min="1"
           max="12"
           defaultValue={defaultValue}
+          onChange={(event) => onChange(elementID, event.target.value)}
         />
       </div>
     </div>
