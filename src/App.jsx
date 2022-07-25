@@ -25,7 +25,12 @@ function App() {
           <Routes>
             <Route
               path="/settings"
-              element={<Settings onConfirm={handleSettingsConfirm} />}
+              element={
+                <Settings
+                  defaultValues={settingsValue}
+                  onConfirm={handleSettingsConfirm}
+                />
+              }
             />
             <Route
               path="/"

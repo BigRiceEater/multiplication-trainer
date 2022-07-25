@@ -7,7 +7,8 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      [`${elementIDFromLabel("Minimum Operand")}`]: 1,
+      [`${elementIDFromLabel("Minimum Operand")}`]:
+        this.props.defaultValues[`${elementIDFromLabel("Minimum Operand")}`],
     };
   }
 
@@ -23,6 +24,9 @@ class Settings extends React.Component {
           <NumberSelection
             label="Minimum Operand"
             onChange={this.handleValueChanged}
+            defaultValue={
+              this.state[`${elementIDFromLabel("Minimum Operand")}`]
+            }
           />
         </form>
         <button
