@@ -6,10 +6,16 @@ import elementIDFromLabel from "../util/elementIDFromLabel";
 class Settings extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      [`${elementIDFromLabel("Minimum Operand")}`]:
-        this.props.defaultValues[`${elementIDFromLabel("Minimum Operand")}`],
-    };
+    this.settings = ["Minimum Operand", "Maximum Operand"];
+
+    const constructState = {};
+    this.settings.forEach(
+      (label) =>
+        (constructState[`${elementIDFromLabel(label)}`] =
+          this.props.defaultValues[`${elementIDFromLabel(label)}`])
+    );
+
+    this.state = constructState;
   }
 
   handleValueChanged = (elementID, value) => {
