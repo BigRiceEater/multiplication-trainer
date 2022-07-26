@@ -1,5 +1,6 @@
 import React from "react";
 import NumberSelection from "./NumberSelection";
+import NumberRangeSelection from "./NumberRangeSelection";
 
 import elementIDFromLabel from "../util/elementIDFromLabel";
 
@@ -27,14 +28,15 @@ class Settings extends React.Component {
     return (
       <div className="container my-5">
         <form>
-          {this.settings.map((label) => (
+          {/* {this.settings.map((label) => (
             <NumberSelection
               key={label}
               label={label}
               onChange={this.handleValueChanged}
               defaultValue={this.state[`${elementIDFromLabel(label)}`]}
             />
-          ))}
+          ))} */}
+          <NumberRangeSelection />
         </form>
         <button
           className="btn btn-success w-50"
