@@ -34,7 +34,12 @@ function App() {
             />
             <Route
               path="/"
-              element={<Trainer min={settingsValue["minimum-operand-input"]} />}
+              element={
+                <Trainer
+                  min={settingsValue["minimum-operand-input"]}
+                  max={settingsValue["maximum-operand-input"]}
+                />
+              }
             />
           </Routes>
         </Router>
