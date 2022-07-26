@@ -27,13 +27,14 @@ class Settings extends React.Component {
     return (
       <div className="container my-5">
         <form>
-          <NumberSelection
-            label="Minimum Operand"
-            onChange={this.handleValueChanged}
-            defaultValue={
-              this.state[`${elementIDFromLabel("Minimum Operand")}`]
-            }
-          />
+          {this.settings.map((label) => (
+            <NumberSelection
+              key={label}
+              label={label}
+              onChange={this.handleValueChanged}
+              defaultValue={this.state[`${elementIDFromLabel(label)}`]}
+            />
+          ))}
         </form>
         <button
           className="btn btn-success w-50"
