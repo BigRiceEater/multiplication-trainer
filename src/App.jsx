@@ -10,9 +10,8 @@ import Settings from "./components/Settings";
 function App() {
   const [settingsValue, setSettingsValue] = useState({});
 
-  function handleSettingsConfirm(valueObj) {
-    console.log(valueObj);
-    setSettingsValue(valueObj);
+  function handleSettingsChanged(values) {
+    setSettingsValue(values);
   }
 
   return (
@@ -28,17 +27,14 @@ function App() {
               element={
                 <Settings
                   defaultValues={settingsValue}
-                  onConfirm={handleSettingsConfirm}
+                  onChange={handleSettingsChanged}
                 />
               }
             />
             <Route
               path="/"
               element={
-                <Trainer
-                  min={settingsValue["minimum-operand-input"]}
-                  max={settingsValue["maximum-operand-input"]}
-                />
+                <Trainer min={settingsValue.min} max={settingsValue.max} />
               }
             />
           </Routes>

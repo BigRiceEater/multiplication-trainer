@@ -19,7 +19,12 @@ class Settings extends React.Component {
   };
 
   handleRangeChanged = (values) => {
-    this.setState({ max: values.max, min: values.min });
+    this.setState({ max: values.max, min: values.min }, () => {
+      const { onChange } = this.props;
+      if (onChange) {
+        onChange({ max: this.state.max, min: this.state.min });
+      }
+    });
   };
 
   render() {
