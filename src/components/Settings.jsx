@@ -1,30 +1,28 @@
 import React from "react";
 import NumberSelection from "./NumberSelection";
 import NumberRangeSelection from "./NumberRangeSelection";
+import constants from "../util/constants";
 
 import elementIDFromLabel from "../util/elementIDFromLabel";
 
 class Settings extends React.Component {
   constructor(props) {
     super(props);
-    this.settings = ["Minimum Operand", "Maximum Operand"];
-
-    const constructState = {};
-    this.settings.forEach(
-      (label) =>
-        (constructState[`${elementIDFromLabel(label)}`] =
-          this.props.defaultValues[`${elementIDFromLabel(label)}`])
-    );
-
-    this.state = constructState;
+    this.state = {
+      max: constants.absoluteMaxOperand,
+      min: constants.absoluteMinOperand,
+    };
   }
 
   handleValueChanged = (elementID, value) => {
     this.setState({ [elementID]: Number(value) });
   };
 
+  handleRangeChanged = (values) => {
+    this.setState({ max: values.max, min: values.min });
+  };
+
   render() {
-    const { onConfirm } = this.props;
     return (
       <div className="container my-5">
         <form>
@@ -36,15 +34,8 @@ class Settings extends React.Component {
               defaultValue={this.state[`${elementIDFromLabel(label)}`]}
             />
           ))} */}
-          <NumberRangeSelection />
+          <NumberRangeSelection onValueChanged={this.handleRangeChanged} />
         </form>
-        <button
-          className="btn btn-success w-50"
-          type="button"
-          onClick={() => onConfirm(this.state)}
-        >
-          Set
-        </button>
       </div>
     );
   }

@@ -23,7 +23,16 @@ class NumberRangeSelection extends React.Component {
       newState["max-operand-input"] = value;
     }
 
-    this.setState(newState);
+    this.setState(newState, () => {
+      const { onValueChanged } = this.props;
+
+      if (onValueChanged) {
+        onValueChanged({
+          max: this.state["max-operand-input"],
+          min: this.state["min-operand-input"],
+        });
+      }
+    });
   };
 
   render() {
