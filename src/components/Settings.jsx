@@ -8,9 +8,12 @@ import elementIDFromLabel from "../util/elementIDFromLabel";
 class Settings extends React.Component {
   constructor(props) {
     super(props);
+
+    const { defaultValues: { max, min } = {} } = this.props;
+
     this.state = {
-      max: constants.absoluteMaxOperand,
-      min: constants.absoluteMinOperand,
+      max: max || constants.absoluteMaxOperand,
+      min: min || constants.absoluteMinOperand,
     };
   }
 
@@ -28,6 +31,7 @@ class Settings extends React.Component {
   };
 
   render() {
+    const { max, min } = this.state;
     return (
       <div className="container my-5">
         <form>
@@ -39,7 +43,11 @@ class Settings extends React.Component {
               defaultValue={this.state[`${elementIDFromLabel(label)}`]}
             />
           ))} */}
-          <NumberRangeSelection onValueChanged={this.handleRangeChanged} />
+          <NumberRangeSelection
+            defaultMin={min}
+            defaultMax={max}
+            onValueChanged={this.handleRangeChanged}
+          />
         </form>
       </div>
     );
