@@ -18,9 +18,9 @@ function Toggle({ label, checked = false, onChange }) {
   };
 
   return (
-    <div className="row">
+    <div className="mb-3 row align-items-center">
       <div className="col-sm-4">{label}</div>
-      <div className="col-sm-8">
+      <div className="col-sm-1">
         <input
           type="checkbox"
           className="form-check-input"
