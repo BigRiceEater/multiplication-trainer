@@ -1,6 +1,7 @@
 import React from "react";
 import NumberSelection from "./NumberSelection";
 import NumberRangeSelection from "./NumberRangeSelection";
+import Toggle from "./Toggle";
 import constants from "../util/constants";
 
 import elementIDFromLabel from "../util/elementIDFromLabel";
@@ -46,6 +47,7 @@ class Settings extends React.Component {
             defaultMax={max}
             onValueChanged={this.handleRangeChanged}
           />
+          <Toggle label="Train specific multipler" />
           <NumberSelection
             label="Specific Multiplier"
             defaultValue={multiplier}
