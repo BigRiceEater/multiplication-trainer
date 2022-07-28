@@ -47,7 +47,9 @@ class Settings extends React.Component {
             defaultMax={max}
             onValueChanged={this.handleRangeChanged}
           />
-          <Toggle label="Train specific multipler" />
+
+          <Toggle label="Train Specific Multipler" />
+
           <NumberSelection
             label="Specific Multiplier"
             defaultValue={multiplier}
