@@ -1,6 +1,11 @@
 import elementIDFromLabel from "../util/elementIDFromLabel";
+import constants from "../util/constants";
 
-function NumberSelection({ label, defaultValue = 1, onChange }) {
+function NumberSelection({
+  label,
+  defaultValue = constants.absoluteMinOperand,
+  onChange,
+}) {
   const elementID = elementIDFromLabel(label);
   return (
     <div className="mb-3 row">
@@ -12,10 +17,10 @@ function NumberSelection({ label, defaultValue = 1, onChange }) {
           type="number"
           className="form-control"
           id={elementID}
-          min="1"
-          max="12"
+          min={constants.absoluteMinOperand}
+          max={constants.absoluteMaxOperand}
           defaultValue={defaultValue}
-          onChange={(event) => onChange(elementID, event.target.value)}
+          onChange={(event) => onChange(Number(event.target.value), elementID)}
         />
       </div>
     </div>

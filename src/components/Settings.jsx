@@ -9,44 +9,47 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
 
-    const { defaultValues: { max, min } = {} } = this.props;
+    const { defaultValues: { max, min, multiplier } = {} } = this.props;
 
     this.state = {
       max: max || constants.absoluteMaxOperand,
       min: min || constants.absoluteMinOperand,
+      multiplier: multiplier || 0,
     };
   }
 
-  handleValueChanged = (elementID, value) => {
-    this.setState({ [elementID]: Number(value) });
+  handleRangeChanged = (values) => {
+    this.setState(
+      { max: values.max, min: values.min },
+      this.passValueChangeToParentComponent
+    );
   };
 
-  handleRangeChanged = (values) => {
-    this.setState({ max: values.max, min: values.min }, () => {
-      const { onChange } = this.props;
-      if (onChange) {
-        onChange({ max: this.state.max, min: this.state.min });
-      }
-    });
+  handleSpecificMultiplierChanged = (value) => {
+    this.setState({ multiplier: value }, this.passValueChangeToParentComponent);
   };
+
+  passValueChangeToParentComponent() {
+    const { onChange } = this.props;
+    if (onChange) {
+      onChange(this.state);
+    }
+  }
 
   render() {
-    const { max, min } = this.state;
+    const { max, min, multiplier } = this.state;
     return (
       <div className="container my-5">
         <form>
-          {/* {this.settings.map((label) => (
-            <NumberSelection
-              key={label}
-              label={label}
-              onChange={this.handleValueChanged}
-              defaultValue={this.state[`${elementIDFromLabel(label)}`]}
-            />
-          ))} */}
           <NumberRangeSelection
             defaultMin={min}
             defaultMax={max}
             onValueChanged={this.handleRangeChanged}
+          />
+          <NumberSelection
+            label="Specific Multiplier"
+            defaultValue={multiplier}
+            onChange={this.handleSpecificMultiplierChanged}
           />
         </form>
       </div>
