@@ -2,6 +2,7 @@ import elementIDFromLabel from "../util/elementIDFromLabel";
 import constants from "../util/constants";
 
 function NumberSelection({
+  isDisabled = false,
   label,
   defaultValue = constants.absoluteMinOperand,
   onChange,
@@ -14,6 +15,7 @@ function NumberSelection({
       </label>
       <div className="col-sm-8">
         <input
+          disabled={isDisabled}
           type="number"
           className="form-control"
           id={elementID}

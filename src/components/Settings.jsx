@@ -54,6 +54,7 @@ class Settings extends React.Component {
             label="Specific Multiplier"
             defaultValue={multiplier}
             onChange={this.handleSpecificMultiplierChanged}
+            isDisabled={false}
           />
         </form>
       </div>
