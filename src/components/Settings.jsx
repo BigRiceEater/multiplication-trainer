@@ -10,13 +10,20 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
 
-    const { defaultValues: { max, min, multiplier } = {} } = this.props;
+    const {
+      defaultValues: {
+        max,
+        min,
+        multiplier,
+        isTrainingSpecificMultiplier = false,
+      } = {},
+    } = this.props;
 
     this.state = {
       max: max || constants.absoluteMaxOperand,
       min: min || constants.absoluteMinOperand,
       multiplier: multiplier || 0,
-      isTrainingSpecificMultiplier: false,
+      isTrainingSpecificMultiplier,
     };
   }
 
@@ -59,6 +66,7 @@ class Settings extends React.Component {
           <Toggle
             label="Specific Multiplier"
             onChange={this.handleTrainMultiplierCheckboxChanged}
+            checked={isTrainingSpecificMultiplier}
           />
 
           <NumberSelection
