@@ -34,8 +34,10 @@ class Trainer extends React.Component {
   }
 
   refresh() {
-    const { min = 1, max = 9 } = this.props;
-    const a = getNumber(min, max);
+    const { min = 1, max = 9, fixedOperand = 0 } = this.props;
+
+    // if an operand is provided, this means we are training a specific timestable.
+    const a = fixedOperand > 0 ? fixedOperand : getNumber(min, max);
     const b = getNumber(min, max);
 
     const choices = this.createValues();

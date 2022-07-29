@@ -34,7 +34,15 @@ function App() {
             <Route
               path="/"
               element={
-                <Trainer min={settingsValue.min} max={settingsValue.max} />
+                <Trainer
+                  min={settingsValue.min}
+                  max={settingsValue.max}
+                  fixedOperand={
+                    settingsValue.isTrainingSpecificMultiplier
+                      ? settingsValue.multiplier
+                      : 0
+                  }
+                />
               }
             />
           </Routes>
