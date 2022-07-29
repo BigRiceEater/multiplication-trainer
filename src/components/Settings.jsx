@@ -46,7 +46,7 @@ class Settings extends React.Component {
   }
 
   render() {
-    const { max, min, multiplier } = this.state;
+    const { max, min, multiplier, isTrainingSpecificMultiplier } = this.state;
     return (
       <div className="container my-5">
         <form>
@@ -65,7 +65,7 @@ class Settings extends React.Component {
             label="Multiplier"
             defaultValue={multiplier}
             onChange={this.handleSpecificMultiplierChanged}
-            isDisabled={!this.state.isTrainingSpecificMultiplier}
+            isDisabled={!isTrainingSpecificMultiplier}
           />
         </form>
       </div>
