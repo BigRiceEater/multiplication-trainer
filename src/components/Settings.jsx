@@ -16,6 +16,7 @@ class Settings extends React.Component {
       max: max || constants.absoluteMaxOperand,
       min: min || constants.absoluteMinOperand,
       multiplier: multiplier || 0,
+      isTrainingSpecificMultiplier: false,
     };
   }
 
@@ -28,6 +29,13 @@ class Settings extends React.Component {
 
   handleSpecificMultiplierChanged = (value) => {
     this.setState({ multiplier: value }, this.passValueChangeToParentComponent);
+  };
+
+  handleTrainMultiplierCheckboxChanged = (value) => {
+    this.setState(
+      { isTrainingSpecificMultiplier: value },
+      this.passValueChangeToParentComponent
+    );
   };
 
   passValueChangeToParentComponent() {
@@ -48,13 +56,16 @@ class Settings extends React.Component {
             onValueChanged={this.handleRangeChanged}
           />
 
-          <Toggle label="Train Specific Multipler" />
+          <Toggle
+            label="Train Specific Multipler"
+            onChange={this.handleTrainMultiplierCheckboxChanged}
+          />
 
           <NumberSelection
             label="Specific Multiplier"
             defaultValue={multiplier}
             onChange={this.handleSpecificMultiplierChanged}
-            isDisabled={false}
+            isDisabled={!this.state.isTrainingSpecificMultiplier}
           />
         </form>
       </div>
