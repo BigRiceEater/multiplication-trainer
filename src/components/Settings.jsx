@@ -57,12 +57,12 @@ class Settings extends React.Component {
           />
 
           <Toggle
-            label="Train Specific Multipler"
+            label="Specific Multiplier"
             onChange={this.handleTrainMultiplierCheckboxChanged}
           />
 
           <NumberSelection
-            label="Specific Multiplier"
+            label="Multiplier"
             defaultValue={multiplier}
             onChange={this.handleSpecificMultiplierChanged}
             isDisabled={!this.state.isTrainingSpecificMultiplier}
