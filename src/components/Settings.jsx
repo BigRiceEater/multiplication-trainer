@@ -22,7 +22,7 @@ class Settings extends React.Component {
     this.state = {
       max: max || constants.absoluteMaxOperand,
       min: min || constants.absoluteMinOperand,
-      multiplier: multiplier || 0,
+      multiplier: multiplier || 1,
       isTrainingSpecificMultiplier,
     };
   }
