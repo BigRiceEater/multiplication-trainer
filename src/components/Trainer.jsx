@@ -5,6 +5,7 @@ import Clock from "./Clock";
 
 import getNumber from "../util/getNumber.js";
 import NextButton from "./NextButton";
+import constants from "../util/constants";
 
 class Trainer extends React.Component {
   constructor(props) {
@@ -26,11 +27,24 @@ class Trainer extends React.Component {
   createValues() {
     return Array(this.numChoices)
       .fill(0)
-      .map(() => {
-        const a = getNumber(1, 9);
-        const b = getNumber(1, 9);
-        return a * b;
-      });
+      .map(() => this.generateValue());
+  }
+
+  generateValue() {
+    return (
+      getNumber(constants.absoluteMinOperand, constants.absoluteMaxOperand) *
+      getNumber(constants.absoluteMinOperand, constants.absoluteMaxOperand)
+    );
+  }
+
+  fixDuplicateAnswerInChoices(answer, choices) {
+    const exists = choices.findIndex((item) => item === answer);
+    if (exists > -1) {
+      do {
+        var newChoiceValue = this.generateValue();
+        choices[exists] = newChoiceValue;
+      } while (newChoiceValue === answer);
+    }
   }
 
   refresh() {
@@ -44,6 +58,8 @@ class Trainer extends React.Component {
     const answer = a * b;
     const replaceChoiceIndex = getNumber(0, 3);
     choices[replaceChoiceIndex] = answer;
+
+    this.fixDuplicateAnswerInChoices(answer, choices);
 
     this.setState({
       operands: [a, b],
