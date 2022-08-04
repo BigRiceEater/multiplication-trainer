@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NumberSelection from "./NumberSelection";
 import NumberRangeSelection from "./NumberRangeSelection";
 import Toggle from "./Toggle";
@@ -6,79 +6,70 @@ import constants from "../util/constants";
 
 import elementIDFromLabel from "../util/elementIDFromLabel";
 
-class Settings extends React.Component {
-  constructor(props) {
-    super(props);
+function Settings(props) {
+  const {
+    max: defaultMax = constants.absoluteMaxOperand,
+    min: defaultMin = constants.absoluteMinOperand,
+    multiplier: iniMultiplier = 1,
+    isTrainingSpecificMultiplier: iniIsTrainingSpecificMultiplier = false,
+  } = ({} = props);
 
-    const {
-      defaultValues: {
-        max,
-        min,
-        multiplier,
-        isTrainingSpecificMultiplier = false,
-      } = {},
-    } = this.props;
+  const [range, setRange] = useState({ max: defaultMax, min: defaultMin });
+  const [multiplier, setMultiplier] = useState(iniMultiplier);
+  const [isTrainingSpecificMultiplier, setIsTrainingSpecificMultiplier] =
+    useState(iniIsTrainingSpecificMultiplier);
 
-    this.state = {
-      max: max || constants.absoluteMaxOperand,
-      min: min || constants.absoluteMinOperand,
-      multiplier: multiplier || 1,
-      isTrainingSpecificMultiplier,
-    };
-  }
-
-  handleRangeChanged = (values) => {
-    this.setState(
+  const handleRangeChanged = (values) => {
+    setRange(
       { max: values.max, min: values.min },
-      this.passValueChangeToParentComponent
+      passValueChangeToParentComponent
     );
   };
 
-  handleSpecificMultiplierChanged = (value) => {
-    this.setState({ multiplier: value }, this.passValueChangeToParentComponent);
+  const handleSpecificMultiplierChanged = (value) => {
+    setMultiplier(value, passValueChangeToParentComponent);
   };
 
-  handleTrainMultiplierCheckboxChanged = (value) => {
-    this.setState(
-      { isTrainingSpecificMultiplier: value },
-      this.passValueChangeToParentComponent
-    );
+  const handleTrainMultiplierCheckboxChanged = (value) => {
+    setIsTrainingSpecificMultiplier(value, passValueChangeToParentComponent);
   };
 
-  passValueChangeToParentComponent() {
-    const { onChange } = this.props;
+  const passValueChangeToParentComponent = () => {
+    const { onChange } = props;
     if (onChange) {
-      onChange(this.state);
+      onChange({
+        max: range.max,
+        min: range.min,
+        multiplier,
+        isTrainingSpecificMultiplier,
+      });
     }
-  }
+  };
 
-  render() {
-    const { max, min, multiplier, isTrainingSpecificMultiplier } = this.state;
-    return (
-      <div className="container my-5">
-        <form>
-          <NumberRangeSelection
-            defaultMin={min}
-            defaultMax={max}
-            onValueChanged={this.handleRangeChanged}
-          />
+  return (
+    <div className="container my-5">
+      <form>
+        <NumberRangeSelection
+          defaultMin={range.min}
+          defaultMax={range.max}
+          onValueChanged={handleRangeChanged}
+        />
 
-          <Toggle
-            label="Specific Multiplier"
-            onChange={this.handleTrainMultiplierCheckboxChanged}
-            checked={isTrainingSpecificMultiplier}
-          />
+        <Toggle
+          label="Specific Multiplier"
+          onChange={handleTrainMultiplierCheckboxChanged}
+          checked={isTrainingSpecificMultiplier}
+        />
 
-          <NumberSelection
-            label="Multiplier"
-            defaultValue={multiplier}
-            onChange={this.handleSpecificMultiplierChanged}
-            isDisabled={!isTrainingSpecificMultiplier}
-          />
-        </form>
-      </div>
-    );
-  }
+        <NumberSelection
+          label="Multiplier"
+          defaultValue={multiplier}
+          onChange={handleSpecificMultiplierChanged}
+          isDisabled={!isTrainingSpecificMultiplier}
+        />
+      </form>
+    </div>
+  );
 }
 
 export default Settings;
