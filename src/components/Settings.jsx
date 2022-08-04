@@ -4,20 +4,25 @@ import NumberRangeSelection from "./NumberRangeSelection";
 import Toggle from "./Toggle";
 import constants from "../util/constants";
 
+import { useSelector, useDispatch } from "react-redux";
+import { toggle } from "../features/settings/specificMutliplierSlice";
+
 import elementIDFromLabel from "../util/elementIDFromLabel";
 
 function Settings(props) {
+  const dispatch = useDispatch();
+
   const {
     max: defaultMax = constants.absoluteMaxOperand,
     min: defaultMin = constants.absoluteMinOperand,
     multiplier: iniMultiplier = 1,
-    isTrainingSpecificMultiplier: iniIsTrainingSpecificMultiplier = false,
   } = ({} = props);
 
   const [range, setRange] = useState({ max: defaultMax, min: defaultMin });
   const [multiplier, setMultiplier] = useState(iniMultiplier);
-  const [isTrainingSpecificMultiplier, setIsTrainingSpecificMultiplier] =
-    useState(iniIsTrainingSpecificMultiplier);
+  const isTrainingSpecificMultiplier = useSelector(
+    (state) => state.specificMultiplier.value
+  );
 
   const handleRangeChanged = (values) => {
     setRange(
@@ -31,7 +36,7 @@ function Settings(props) {
   };
 
   const handleTrainMultiplierCheckboxChanged = (value) => {
-    setIsTrainingSpecificMultiplier(value, passValueChangeToParentComponent);
+    dispatch(toggle());
   };
 
   const passValueChangeToParentComponent = () => {
@@ -41,7 +46,6 @@ function Settings(props) {
         max: range.max,
         min: range.min,
         multiplier,
-        isTrainingSpecificMultiplier,
       });
     }
   };
