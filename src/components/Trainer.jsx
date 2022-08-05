@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Question from "./Question";
 import MultipleChoice from "./MultipleChoice";
 import Clock from "./Clock";
@@ -7,110 +7,93 @@ import getNumber from "../util/getNumber.js";
 import NextButton from "./NextButton";
 import constants from "../util/constants";
 
-class Trainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      operands: [0, 0],
-      choices: [0, 0, 0, 0],
-      answerClicked: false,
-      userClickedButtonIndex: 0,
-      correctIndex: 0,
-    };
-    this.numChoices = 4;
-  }
+function Trainer(props) {
+  const [operands, setOperands] = useState([0, 0]);
+  const [userInteraction, setUserInteraction] = useState({
+    answerClicked: false,
+    userClickedButtonIndex: 0,
+  });
+  const numChoices = 4;
+  const [choices, setChoices] = useState(Array(numChoices).fill(0));
+  const [correctIndex, setCorrectIndex] = useState(0);
 
-  componentDidMount() {
-    this.refresh();
-  }
+  useEffect(() => refresh(), []);
 
-  createValues() {
-    return Array(this.numChoices)
+  const createValues = () => {
+    return Array(numChoices)
       .fill(0)
-      .map(() => this.generateValue());
-  }
+      .map(() => generateValue());
+  };
 
-  generateValue() {
+  const generateValue = () => {
     return (
       getNumber(constants.absoluteMinOperand, constants.absoluteMaxOperand) *
       getNumber(constants.absoluteMinOperand, constants.absoluteMaxOperand)
     );
-  }
+  };
 
-  fixDuplicateAnswerInChoices(answer, choices) {
+  const fixDuplicateAnswerInChoices = (answer, choices) => {
     const exists = choices.findIndex((item) => item === answer);
     if (exists > -1) {
       do {
-        var newChoiceValue = this.generateValue();
+        var newChoiceValue = generateValue();
         choices[exists] = newChoiceValue;
       } while (newChoiceValue === answer);
     }
-  }
+  };
 
-  refresh() {
-    const { min = 1, max = 9, fixedOperand = 0 } = this.props;
+  const refresh = () => {
+    const { min = 1, max = 9, fixedOperand = 0 } = props;
 
     // if an operand is provided, this means we are training a specific timestable.
     const a = fixedOperand > 0 ? fixedOperand : getNumber(min, max);
     const b = getNumber(min, max);
 
-    const choices = this.createValues();
+    const choices = createValues();
     const answer = a * b;
     const replaceChoiceIndex = getNumber(0, 3);
     choices[replaceChoiceIndex] = answer;
 
-    this.fixDuplicateAnswerInChoices(answer, choices);
+    fixDuplicateAnswerInChoices(answer, choices);
 
-    this.setState({
-      operands: [a, b],
-      choices,
-      answerClicked: false,
-      correctIndex: replaceChoiceIndex,
-    });
-  }
+    setOperands([a, b]);
+    setUserInteraction({ answerClicked: false, userClickedButtonIndex: 0 });
+    setChoices(choices);
+    setCorrectIndex(replaceChoiceIndex);
+  };
 
-  handleChoice = (userClickedButtonIndex) => {
-    this.setState({ answerClicked: true, userClickedButtonIndex });
+  const handleChoice = (userClickedButtonIndex) => {
+    setUserInteraction({ answerClicked: true, userClickedButtonIndex });
     //this.refresh();
   };
 
-  handleNextButtonClick = () => {
-    this.refresh();
+  const handleNextButtonClick = () => {
+    refresh();
   };
 
-  render() {
-    const {
-      operands,
-      choices,
-      answerClicked,
-      correctIndex,
-      userClickedButtonIndex,
-    } = this.state;
-    return (
-      <React.Fragment>
-        <Question operands={operands} />
-        <MultipleChoice
-          choices={choices}
-          correctIndex={correctIndex}
-          onClick={this.handleChoice}
-          answerClicked={answerClicked}
-          userClickedButtonIndex={userClickedButtonIndex}
-          showCorrection={answerClicked}
-        />
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <NextButton
-                show={answerClicked}
-                onClick={this.handleNextButtonClick}
-              />
-            </div>
+  const { answerClicked, userClickedButtonIndex } = userInteraction;
+
+  return (
+    <React.Fragment>
+      <Question operands={operands} />
+      <MultipleChoice
+        choices={choices}
+        correctIndex={correctIndex}
+        onClick={handleChoice}
+        answerClicked={answerClicked}
+        userClickedButtonIndex={userClickedButtonIndex}
+        showCorrection={answerClicked}
+      />
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <NextButton show={answerClicked} onClick={handleNextButtonClick} />
           </div>
         </div>
-        <Clock />
-      </React.Fragment>
-    );
-  }
+      </div>
+      <Clock />
+    </React.Fragment>
+  );
 }
 
 export default Trainer;
