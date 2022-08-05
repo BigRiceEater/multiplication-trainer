@@ -6,7 +6,9 @@ export const specificMultiplierSlice = createSlice({
     value: false,
   },
   reducers: {
-    toggle: (state) => !state.value,
+    toggle: (state) => {
+      state.value = !state.value;
+    },
   },
 });
 
