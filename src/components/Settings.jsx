@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NumberSelection from "./NumberSelection";
 import NumberRangeSelection from "./NumberRangeSelection";
 import Toggle from "./Toggle";
@@ -25,14 +25,11 @@ function Settings(props) {
   );
 
   const handleRangeChanged = (values) => {
-    setRange(
-      { max: values.max, min: values.min },
-      passValueChangeToParentComponent
-    );
+    setRange({ max: values.max, min: values.min });
   };
 
   const handleSpecificMultiplierChanged = (value) => {
-    setMultiplier(value, passValueChangeToParentComponent);
+    setMultiplier(value);
   };
 
   const handleTrainMultiplierCheckboxChanged = (value) => {
@@ -49,6 +46,12 @@ function Settings(props) {
       });
     }
   };
+
+  useEffect(passValueChangeToParentComponent, [
+    range,
+    multiplier,
+    isTrainingSpecificMultiplier,
+  ]);
 
   return (
     <div className="container my-5">
