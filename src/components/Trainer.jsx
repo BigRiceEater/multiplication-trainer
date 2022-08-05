@@ -32,7 +32,7 @@ function Trainer(props) {
     );
   };
 
-  const fixDuplicateAnswerInChoices = (answer, choices) => {
+  const rerollRandomValueMatchingAnswer = (answer, choices) => {
     const exists = choices.findIndex((item) => item === answer);
     if (exists > -1) {
       do {
@@ -51,10 +51,9 @@ function Trainer(props) {
 
     const choices = createValues();
     const answer = a * b;
+    rerollRandomValueMatchingAnswer(answer, choices);
     const replaceChoiceIndex = getNumber(0, 3);
     choices[replaceChoiceIndex] = answer;
-
-    fixDuplicateAnswerInChoices(answer, choices);
 
     setOperands([a, b]);
     setUserInteraction({ answerClicked: false, userClickedButtonIndex: 0 });
