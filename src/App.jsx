@@ -37,11 +37,7 @@ function App() {
                 <Trainer
                   min={settingsValue.min}
                   max={settingsValue.max}
-                  fixedOperand={
-                    settingsValue.isTrainingSpecificMultiplier
-                      ? settingsValue.multiplier
-                      : 0
-                  }
+                  fixedOperand={settingsValue.multiplier}
                 />
               }
             />
