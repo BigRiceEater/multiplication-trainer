@@ -13,52 +13,41 @@ function Settings(props) {
   const dispatch = useDispatch();
 
   const {
-    max: defaultMax = constants.absoluteMaxOperand,
-    min: defaultMin = constants.absoluteMinOperand,
-    multiplier: iniMultiplier = 1,
-  } = ({} = props);
+    defaultValues: { max, min, multiplier },
+  } = props || {};
 
-  const [range, setRange] = useState({ max: defaultMax, min: defaultMin });
-  const [multiplier, setMultiplier] = useState(iniMultiplier);
   const isTrainingSpecificMultiplier = useSelector(
     (state) => state.specificMultiplier.value
   );
 
   const handleRangeChanged = (values) => {
-    setRange({ max: values.max, min: values.min });
+    passValueChangeToParentComponent({
+      max: values.max,
+      min: values.min,
+      multiplier,
+    });
   };
 
-  const handleSpecificMultiplierChanged = (value) => {
-    setMultiplier(value);
-  };
+  const handleSpecificMultiplierChanged = (value) =>
+    passValueChangeToParentComponent({ max, min, multiplier: value });
 
   const handleTrainMultiplierCheckboxChanged = (value) => {
     dispatch(toggle());
   };
 
-  const passValueChangeToParentComponent = () => {
+  const passValueChangeToParentComponent = (values) => {
     const { onChange } = props;
     if (onChange) {
-      onChange({
-        max: range.max,
-        min: range.min,
-        multiplier,
-      });
+      onChange(values);
     }
   };
-
-  useEffect(passValueChangeToParentComponent, [
-    range,
-    multiplier,
-    isTrainingSpecificMultiplier,
-  ]);
 
   return (
     <div className="container my-5">
       <form>
         <NumberRangeSelection
-          defaultMin={range.min}
-          defaultMax={range.max}
+          defaultMin={min}
+          defaultMax={max}
           onValueChanged={handleRangeChanged}
         />
 

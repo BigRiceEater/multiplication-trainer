@@ -8,7 +8,11 @@ import Trainer from "./components/Trainer";
 import Settings from "./components/Settings";
 
 function App() {
-  const [settingsValue, setSettingsValue] = useState({});
+  const [settingsValue, setSettingsValue] = useState({
+    max: 9,
+    min: 1,
+    multiplier: 1,
+  });
 
   function handleSettingsChanged(values) {
     setSettingsValue(values);
