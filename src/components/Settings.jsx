@@ -17,7 +17,7 @@ function Settings(props) {
   } = props || {};
 
   const isTrainingSpecificMultiplier = useSelector(
-    (state) => state.specificMultiplier.value
+    (state) => state.specificMultiplier.checked
   );
 
   const handleRangeChanged = (values) => {

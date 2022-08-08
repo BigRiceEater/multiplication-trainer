@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export const specificMultiplierSlice = createSlice({
   name: "specificMultiplier",
   initialState: {
-    value: false,
+    checked: false,
   },
   reducers: {
     toggle: (state) => {
-      state.value = !state.value;
+      state.checked = !state.checked;
     },
   },
 });

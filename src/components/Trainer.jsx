@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 function Trainer(props) {
   const isTrainingSpecificMultiplier = useSelector(
-    (state) => state.specificMultiplier.value
+    (state) => state.specificMultiplier.checked
   );
   const [operands, setOperands] = useState([0, 0]);
   const [userInteraction, setUserInteraction] = useState({
