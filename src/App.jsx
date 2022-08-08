@@ -11,7 +11,6 @@ function App() {
   const [settingsValue, setSettingsValue] = useState({
     max: 9,
     min: 1,
-    multiplier: 1,
   });
 
   function handleSettingsChanged(values) {
@@ -38,11 +37,7 @@ function App() {
             <Route
               path="/"
               element={
-                <Trainer
-                  min={settingsValue.min}
-                  max={settingsValue.max}
-                  fixedOperand={settingsValue.multiplier}
-                />
+                <Trainer min={settingsValue.min} max={settingsValue.max} />
               }
             />
           </Routes>

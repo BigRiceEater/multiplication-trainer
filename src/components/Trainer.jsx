@@ -13,6 +13,9 @@ function Trainer(props) {
   const isTrainingSpecificMultiplier = useSelector(
     (state) => state.specificMultiplier.checked
   );
+
+  const fixedOperand = useSelector((state) => state.specificMultiplier.value);
+
   const [operands, setOperands] = useState([0, 0]);
   const [userInteraction, setUserInteraction] = useState({
     answerClicked: false,
@@ -48,7 +51,7 @@ function Trainer(props) {
   };
 
   const refresh = () => {
-    const { min = 1, max = 9, fixedOperand = 1 } = props;
+    const { min = 1, max = 9 } = props;
 
     // if an operand is provided, this means we are training a specific timestable.
     const a = isTrainingSpecificMultiplier ? fixedOperand : getNumber(min, max);

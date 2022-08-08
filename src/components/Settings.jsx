@@ -5,7 +5,10 @@ import Toggle from "./Toggle";
 import constants from "../util/constants";
 
 import { useSelector, useDispatch } from "react-redux";
-import { toggle } from "../features/settings/specificMutliplierSlice";
+import {
+  toggle,
+  setMultiplierValue,
+} from "../features/settings/specificMutliplierSlice";
 
 import elementIDFromLabel from "../util/elementIDFromLabel";
 
@@ -13,8 +16,10 @@ function Settings(props) {
   const dispatch = useDispatch();
 
   const {
-    defaultValues: { max, min, multiplier },
+    defaultValues: { max, min },
   } = props || {};
+
+  const multiplier = useSelector((state) => state.specificMultiplier.value);
 
   const isTrainingSpecificMultiplier = useSelector(
     (state) => state.specificMultiplier.checked
@@ -24,12 +29,13 @@ function Settings(props) {
     passValueChangeToParentComponent({
       max: values.max,
       min: values.min,
-      multiplier,
     });
   };
 
-  const handleSpecificMultiplierChanged = (value) =>
-    passValueChangeToParentComponent({ max, min, multiplier: value });
+  const handleSpecificMultiplierChanged = (value) => {
+    dispatch(setMultiplierValue(value));
+    passValueChangeToParentComponent({ max, min });
+  };
 
   const handleTrainMultiplierCheckboxChanged = (value) => {
     dispatch(toggle());
