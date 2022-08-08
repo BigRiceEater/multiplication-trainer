@@ -9,12 +9,14 @@ import constants from "../util/constants";
 
 import { useSelector, useDispatch } from "react-redux";
 
-function Trainer(props) {
+function Trainer() {
   const isTrainingSpecificMultiplier = useSelector(
     (state) => state.specificMultiplier.checked
   );
 
   const fixedOperand = useSelector((state) => state.specificMultiplier.value);
+  const max = useSelector((state) => state.range.max);
+  const min = useSelector((state) => state.range.min);
 
   const [operands, setOperands] = useState([0, 0]);
   const [userInteraction, setUserInteraction] = useState({
@@ -51,8 +53,6 @@ function Trainer(props) {
   };
 
   const refresh = () => {
-    const { min = 1, max = 9 } = props;
-
     // if an operand is provided, this means we are training a specific timestable.
     const a = isTrainingSpecificMultiplier ? fixedOperand : getNumber(min, max);
     const b = getNumber(min, max);

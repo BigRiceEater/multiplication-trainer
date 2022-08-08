@@ -1,22 +1,13 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 
 import Navigation from "./components/Navigation";
 import Trainer from "./components/Trainer";
 import Settings from "./components/Settings";
 
 function App() {
-  const [settingsValue, setSettingsValue] = useState({
-    max: 9,
-    min: 1,
-  });
-
-  function handleSettingsChanged(values) {
-    setSettingsValue(values);
-  }
-
   return (
     <div className="App">
       <header className="App-header">
@@ -25,21 +16,8 @@ function App() {
         <Router>
           <Navigation />
           <Routes>
-            <Route
-              path="/settings"
-              element={
-                <Settings
-                  defaultValues={settingsValue}
-                  onChange={handleSettingsChanged}
-                />
-              }
-            />
-            <Route
-              path="/"
-              element={
-                <Trainer min={settingsValue.min} max={settingsValue.max} />
-              }
-            />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/" element={<Trainer />} />
           </Routes>
         </Router>
         <p>

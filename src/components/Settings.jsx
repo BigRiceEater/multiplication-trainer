@@ -9,43 +9,31 @@ import {
   toggle,
   setMultiplierValue,
 } from "../features/settings/specificMutliplierSlice";
+import { setRange } from "../features/settings/rangeSlice";
 
 import elementIDFromLabel from "../util/elementIDFromLabel";
 
-function Settings(props) {
+function Settings() {
   const dispatch = useDispatch();
 
-  const {
-    defaultValues: { max, min },
-  } = props || {};
-
   const multiplier = useSelector((state) => state.specificMultiplier.value);
+  const max = useSelector((state) => state.range.max);
+  const min = useSelector((state) => state.range.min);
 
   const isTrainingSpecificMultiplier = useSelector(
     (state) => state.specificMultiplier.checked
   );
 
   const handleRangeChanged = (values) => {
-    passValueChangeToParentComponent({
-      max: values.max,
-      min: values.min,
-    });
+    dispatch(setRange(values));
   };
 
   const handleSpecificMultiplierChanged = (value) => {
     dispatch(setMultiplierValue(value));
-    passValueChangeToParentComponent({ max, min });
   };
 
   const handleTrainMultiplierCheckboxChanged = (value) => {
     dispatch(toggle());
-  };
-
-  const passValueChangeToParentComponent = (values) => {
-    const { onChange } = props;
-    if (onChange) {
-      onChange(values);
-    }
   };
 
   return (
