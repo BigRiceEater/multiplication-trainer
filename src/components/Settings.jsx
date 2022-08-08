@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import NumberSelection from "./NumberSelection";
 import NumberRangeSelection from "./NumberRangeSelection";
 import Toggle from "./Toggle";
-import constants from "../util/constants";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -10,8 +9,6 @@ import {
   setMultiplierValue,
 } from "../features/settings/specificMutliplierSlice";
 import { setRange } from "../features/settings/rangeSlice";
-
-import elementIDFromLabel from "../util/elementIDFromLabel";
 
 function Settings() {
   const dispatch = useDispatch();
