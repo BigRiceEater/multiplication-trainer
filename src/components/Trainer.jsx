@@ -7,7 +7,7 @@ import getNumber from "../util/getNumber.js";
 import NextButton from "./NextButton";
 import constants from "../util/constants";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function Trainer() {
   const isTrainingSpecificMultiplier = useSelector(
