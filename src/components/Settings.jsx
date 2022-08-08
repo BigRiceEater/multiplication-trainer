@@ -13,25 +13,13 @@ import { setRange } from "../features/settings/rangeSlice";
 function Settings() {
   const dispatch = useDispatch();
 
-  const multiplier = useSelector((state) => state.specificMultiplier.value);
   const max = useSelector((state) => state.range.max);
   const min = useSelector((state) => state.range.min);
 
-  const isTrainingSpecificMultiplier = useSelector(
+  const multiplier = useSelector((state) => state.specificMultiplier.value);
+  const multiplierChecked = useSelector(
     (state) => state.specificMultiplier.checked
   );
-
-  const handleRangeChanged = (values) => {
-    dispatch(setRange(values));
-  };
-
-  const handleSpecificMultiplierChanged = (value) => {
-    dispatch(setMultiplierValue(value));
-  };
-
-  const handleTrainMultiplierCheckboxChanged = (value) => {
-    dispatch(toggle());
-  };
 
   return (
     <div className="container my-5">
@@ -39,20 +27,20 @@ function Settings() {
         <NumberRangeSelection
           defaultMin={min}
           defaultMax={max}
-          onValueChanged={handleRangeChanged}
+          onValueChanged={(values) => dispatch(setRange(values))}
         />
 
         <Toggle
           label="Specific Multiplier"
-          onChange={handleTrainMultiplierCheckboxChanged}
-          checked={isTrainingSpecificMultiplier}
+          onChange={() => dispatch(toggle())}
+          checked={multiplierChecked}
         />
 
         <NumberSelection
           label="Multiplier"
           defaultValue={multiplier}
-          onChange={handleSpecificMultiplierChanged}
-          isDisabled={!isTrainingSpecificMultiplier}
+          onChange={(value) => dispatch(setMultiplierValue(value))}
+          isDisabled={!multiplierChecked}
         />
       </form>
     </div>
